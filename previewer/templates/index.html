@@ -1,71 +1,69 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
+        {% load static %}
         <title>{{t_title}}</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-        <style type="text/css">
-            #search{
-                font: 14px arial,sans-serif;
-                line-height: normal;
-                line-height: normal;
-                line-height: 39px;
-                height: 45px !important;
-                font-size: ;
-            }
-            .previwer{
-                height: 44px;
-                margin-left: 10px
-            }
-        </style>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
     
     <body>
-        <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                
-                <form class="row" method="POST" action="." style="margin-top:150px;">
-                    
-                    {% csrf_token %}
-                    <div class="col-12 col-sm pr-sm-0">
-                        <input type="text" name="domain" id="search" value="www.google.com" placeholder="Ener domain to preview" class="form-control">
+        <div class="container-fluid">
+            
+            <div class="container"> 
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <form class="row" method="POST" action="." style="margin-top:150px;">
+                            {% csrf_token %}
+                            <div class="col-12 col-sm pr-sm-0">
+                                <input type="text" name="domain" id="search" value="www.google.com" placeholder="Ener domain to preview" class="form-control">
+                            </div>
+                            <div class="col-12 col-sm-auto pl-sm-0">
+                                <input type="submit" name="commit" value="Preview" class="btn btn-primary btn-block previwer">
+                            </div>
+                        </form>
+                        {% if error_string %}
+                            <div class="s-style" style="margin-top:20px;"> 
+                                <p style="color:red; font-weight:600;font-size:11px;text-align: center;">{{error_string}}</p>
+                                <p style="color:red; font-weight:600;font-size:11px;text-align: center;">{{error}}</p>
+                            </div>
+                        {% endif %}
                     </div>
-                    <div class="col-12 col-sm-auto pl-sm-0">
-                        <input type="submit" name="commit" value="Preview" class="btn btn-primary btn-block previwer">
-                    </div>
-                </form>
-                {% if error_string %}
-                    <div class="s-style" style="margin-top:20px;"> 
-                        <p style="color:red; font-weight:600;font-size:11px;text-align: center;">{{error_string}}</p>
-                        <p style="color:red; font-weight:600;font-size:11px;text-align: center;">{{error}}</p>
-                    </div>
-                {% endif %}
+                   
+                </div>
             </div>
-           
-        </div>
-        <div class="row">
-            {% if details %}
-                <div class="col-md-6" style="margin-top:30px;">
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <img src="{{favicon}}" style="width:120px; height:120px;">
-                                </div>
-                                <div class="col-sm-8">
-                                    <h1 style="font-size:20px;"><a href="{{domain}}">{{title}}</a></h1>
-                                    {% if not description %}
-                                        <p style="font-size: 13px;">{{title}}</p>
-                                    {% else %}
-                                        <p style="font-size: 13px;">{{description}}</p>
-                                    {% endif %}
+            <div class="row">
+                {% if details %}
+                    <div class="col-md-6" style="margin-top:30px;">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="{{favicon}}" style="width:120px; height:120px;">
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <h1 style="font-size:20px;"><a href="{{domain}}">{{title}}</a></h1>
+                                        {% if not description %}
+                                            <p style="font-size: 13px;">{{title}}</p>
+                                        {% else %}
+                                            <p style="font-size: 13px;">{{description}}</p>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
+            
+            <div class="row">
+                <footer class="footer">
+                    <div class="container">
+                        <span class="text-muted">linkpreviewer</span>
+                    </div>
+                </footer>
+            </div>
         </div>
-</div>
     </body>
 </html>

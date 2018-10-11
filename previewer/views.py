@@ -16,7 +16,6 @@ class IndexPage(View):
             domain = request.POST.get('domain', '')
             
             domain = self.fix_domain_protocol(domain)
-            print("DOMAIN ", domain)
             # Get the preview
             try:
                 parsed_response = parse_webpage(None, url=domain, prettify=False)
